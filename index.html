@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <script>
+        function computerPlay(){
+            let rand = Math.random;
+            if(rand <= 1/3){
+                return "Rock"
+            }else if(rand >= 2/3){
+                return "Paper"
+            }
+            return "Scissors"
+        }
+
+        function play(playerSelection, computerSelection){
+            let playerSelectionUpper = playerSelection.toUpperCase();
+            let computerSelectionUpper = computerSelection.toUpperCase();
+            if(playerSelectionUpper === "ROCK" &&  computerSelectionUpper === "SCISSORS" ||
+            playerSelectionUpper === "PAPER" &&  computerSelectionUpper === "ROCK" ||
+            playerSelectionUpper === "SCISSORS" &&  computerSelectionUpper === "PAPER"){
+                return "player"
+            }else{
+                return "computer"
+            }
+        }
+
+        function game(){
+            
+            for(let i = 0; i < 6; i++){
+                let choice = prompt("give me your choice")
+                console.log(play(choice,computerPlay()))
+            }
+        }
+        game()
+    </script>
+</head>
+<body>
+
+</body>
