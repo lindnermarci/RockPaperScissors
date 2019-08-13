@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <head>
-    <script>
-        function computerPlay(){
-            let rand = Math.random;
-            if(rand <= 1/3){
-                return "Rock"
-            }else if(rand >= 2/3){
-                return "Paper"
-            }
-            return "Scissors"
-        }
-
-        function play(playerSelection, computerSelection){
-            let playerSelectionUpper = playerSelection.toUpperCase();
-            let computerSelectionUpper = computerSelection.toUpperCase();
-            if(playerSelectionUpper === "ROCK" &&  computerSelectionUpper === "SCISSORS" ||
-            playerSelectionUpper === "PAPER" &&  computerSelectionUpper === "ROCK" ||
-            playerSelectionUpper === "SCISSORS" &&  computerSelectionUpper === "PAPER"){
-                return "player"
-            }else{
-                return "computer"
-            }
-        }
-
-        function game(){
-            
-            for(let i = 0; i < 6; i++){
-                let choice = prompt("give me your choice")
-                console.log(play(choice,computerPlay()))
-            }
-        }
-        game()
-    </script>
+    
 </head>
 <body>
-
+    <button onclick="displayResult(play('paper'))">Paper</button>
+    <button onclick="displayResult(play('scissors'))">Scissors</button>
+    <button onclick="displayResult(play('rock'))">Rock</button>
+    
+    <div id="result"></div>
+    <script>
+            function computerPlay(){
+                let rand = Math.random();
+                if(rand <= 0.33){
+                    return "Rock"
+                }else if(rand >= 0.66){
+                    return "Paper"
+                }
+                return "Scissors"
+            }
+    
+            function play(playerSelection){
+                let playerSelectionUpper = playerSelection.toUpperCase();
+                let computerSelectionUpper = computerPlay().toUpperCase();
+                if(playerSelectionUpper === "ROCK" &&  computerSelectionUpper === "SCISSORS" ||
+                playerSelectionUpper === "PAPER" &&  computerSelectionUpper === "ROCK" ||
+                playerSelectionUpper === "SCISSORS" &&  computerSelectionUpper === "PAPER"){
+                    return "player"
+                }else{
+                    return "computer"
+                }
+            }
+            let compScore = 0
+            let playerScore = 0
+            let round = 0
+            let div = document.getElementById("result")
+            function displayResult(winner){
+                round++
+                if(winner === "player") playerScore++
+                else compScore++
+                let p = document.createElement('p')
+                p.innerText = `Computer: ${compScore} Player: ${playerScore}`
+                div.innerHTML = ''
+                div.appendChild(p)
+                if(round == 5){
+                    let winner = document.createElement('h2')
+                    winner.innerText = `The winner is: ${compScore > playerScore ? "computer" : "player"}`
+                    div.appendChild(winner)
+                }
+            }
+        </script>
 </body>
